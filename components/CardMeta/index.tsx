@@ -1,8 +1,15 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { useRouter } from "expo-router";
 
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 const CardMeta = () => {
+  const router = useRouter();
+  const handleEdit = () => {
+    console.log("Editar");
+    router.push(`/challenges/2334`);
+  };
+
   return (
     <View style={styles.card}>
       <Text style={styles.title}>
@@ -25,7 +32,10 @@ const CardMeta = () => {
             Novo aporte
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonIcon}>
+        <TouchableOpacity
+          style={styles.buttonIcon}
+          onPress={() => handleEdit()}
+        >
           <FontAwesome name="pencil-square-o" size={18} color="black" />
           <Text style={[styles.text, styles.textSmall]}>Editar</Text>
         </TouchableOpacity>

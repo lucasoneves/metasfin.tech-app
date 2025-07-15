@@ -1,7 +1,23 @@
 import CardMeta from "@/components/CardMeta";
+import { useEffect } from "react";
 import { SafeAreaView, StyleSheet, Text } from "react-native";
 
 const Challenges = () => {
+  useEffect(() => {
+    // getGoalsFromApiAsync();
+  }, []);
+
+  // const getGoalsFromApiAsync = async () => {
+  //   try {
+  //     const response = await fetch("http://127.0.0.1:5000/api/goals");
+  //     const data = await response.json();
+  //     console.log("data", data);
+  //     return data.goals;
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Minhas metas</Text>
