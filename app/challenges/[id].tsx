@@ -10,11 +10,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const ChallengeDetail = () => {
   const [challengeName, setChallengeName] = useState("Carro novo");
-  const [goalAmount, setGoalAmount] = useState("6000000"); // R$ 60.000,00
-  const [currentAmount, setCurrentAmount] = useState("152926"); // R$ 1.529,26
-  const [description, setDescription] = useState(
-    "Economize para a compra do seu carro novo"
-  );
+  const [goalAmount, setGoalAmount] = useState("6000000");
+  const [currentAmount, setCurrentAmount] = useState("152926");
+  const [description, setDescription] = useState("");
   const formatCurrency = (valueInCents: string) => {
     if (!valueInCents) {
       return "R$ 0,00";
@@ -70,6 +68,7 @@ const ChallengeDetail = () => {
       <View style={styles.formGroup}>
         <Text style={styles.label}>Descrição:</Text>
         <TextInput
+          placeholder="Ex: Viagem de férias no final do ano"
           style={[styles.textInput, styles.textArea]}
           multiline
           numberOfLines={4}
@@ -131,6 +130,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     borderColor: "#ccc",
+    backgroundColor: "white",
     borderWidth: 1,
     borderRadius: 8,
     padding: 10,
