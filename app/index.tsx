@@ -19,13 +19,14 @@ export default function Index() {
           Organize suas finanças, estabeleça metas claras e acompanhe seu
           progresso para alcançar seus objetivos.
         </Text>
+
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            router.push("/challenges");
+            router.push("/login");
           }}
         >
-          <Text style={styles.buttonText}>Gerenciar minhas metas</Text>
+          <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
