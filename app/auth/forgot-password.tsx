@@ -1,4 +1,3 @@
-import { Link } from "expo-router";
 import { useState } from "react";
 import {
   Alert,
@@ -10,29 +9,35 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const Login = () => {
+const ForgotPassword = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
-    console.log(email, password);
+  const invalidFormAlert = (message: string) => {
+    if (!isValidEmail(email)) {
+      Alert.alert("Alerta", "Email inválido", [
+        {
+          text: "Cancelar",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        { text: "OK", onPress: () => console.log("OK Pressed") },
+      ]);
+      return;
+    }
   };
 
-  const invalidFormAlert = (message: string) =>
-    Alert.alert("Alert Title", message, [
-      {
-        text: "Cancel",
-        onPress: () => console.log("Cancel Pressed"),
-        style: "cancel",
-      },
-      { text: "OK", onPress: () => console.log("OK Pressed") },
-    ]);
+  const isValidEmail = (email: string) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.logo}>Metasfin.tech</Text>
-      <Text style={styles.title}>Login</Text>
-      <Text style={styles.text}>Preencha seu email e senha de acesso</Text>
+      <Text style={styles.title}>Recuperação de senha</Text>
+      <Text style={styles.text}>
+        Preencha seu email para recuperar sua senha
+      </Text>
       <View style={styles.form}>
         <TextInput
           style={styles.input}
@@ -40,26 +45,12 @@ const Login = () => {
           value={email}
           onChangeText={(val) => setEmail(val)} // Use onChangeText for TextInput
         />
-        <TextInput
-          style={styles.input}
-          placeholder="Senha"
-          value={password}
-          onChangeText={(val) => setPassword(val)} // Use onChangeText and setPassword
-          secureTextEntry
-        />
         <TouchableOpacity
           style={styles.button}
-          onPress={() => invalidFormAlert("Form inválido")}
+          onPress={() => invalidFormAlert("Email inválido")}
         >
-          <Text style={styles.buttonText}>Entrar</Text>
+          <Text style={styles.buttonText}>Enviar</Text>
         </TouchableOpacity>
-        <View style={styles.footerActions}>
-          <Link href={"/"}>Home</Link>
-          <Link href={"/auth/forgot-password"} style={styles.footerActionsText}>
-            Esqueci minha senha
-          </Link>
-          <Text style={styles.footerActionsText}>Cadastre-se</Text>
-        </View>
       </View>
     </SafeAreaView>
   );
@@ -124,4 +115,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
+export default ForgotPassword;

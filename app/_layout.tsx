@@ -24,6 +24,10 @@ export default function RootLayout() {
     <Stack>
       <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen name="login/index" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="auth/forgot-password"
+        options={{ headerShown: false }}
+      />
       <Stack.Screen name="challenges/index" options={{ headerShown: false }} />
       <Stack.Screen name="challenges/[id]" options={{ headerShown: false }} />
     </Stack>
