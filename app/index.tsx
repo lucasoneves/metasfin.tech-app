@@ -1,4 +1,4 @@
-import { useRouter } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import {
   SafeAreaView,
   StyleSheet,
@@ -28,6 +28,15 @@ export default function Index() {
         >
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
+        <Link
+          href="/sign-up"
+          style={[
+            styles.buttonText,
+            { backgroundColor: "#444", marginTop: 10 },
+          ]}
+        >
+          Criar conta
+        </Link>
       </View>
     </SafeAreaView>
   );
