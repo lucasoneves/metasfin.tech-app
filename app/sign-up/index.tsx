@@ -32,41 +32,46 @@ const SignUp = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.logo}>Metasfin.tech</Text>
-      <Text style={styles.title}>Cdastre-se</Text>
-      <Text style={styles.text}>Preencha os dados para criar o acesso</Text>
-      <View style={styles.form}>
-        <TextInput
-          style={styles.input}
-          placeholder="Email"
-          value={email}
-          onChangeText={(val) => setEmail(val)} // Use onChangeText for TextInput
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Nome de usuário"
-          value={username}
-          onChangeText={(val) => setEmail(val)} // Use onChangeText for TextInput
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Senha"
-          value={password}
-          onChangeText={(val) => setPassword(val)} // Use onChangeText and setPassword
-          secureTextEntry
-        />
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => invalidFormAlert("Form inválido")}
-        >
-          <Text style={styles.buttonText}>Entrar</Text>
-        </TouchableOpacity>
-        <View style={styles.footerActions}>
-          <Link href={"/auth/forgot-password"} style={styles.footerActionsText}>
-            Esqueci minha senha
-          </Link>
-          <Link href={"/login"} style={styles.footerActionsText}>
-            <Text>Já tenho cadastro</Text>
-          </Link>
+      <View style={styles.wrapper}>
+        <Text style={styles.title}>Criar conta</Text>
+        <Text style={styles.text}>Preencha os dados para criar o acesso</Text>
+        <View>
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            value={email}
+            onChangeText={(val) => setEmail(val)} // Use onChangeText for TextInput
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Nome de usuário"
+            value={username}
+            onChangeText={(val) => setEmail(val)} // Use onChangeText for TextInput
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Senha"
+            value={password}
+            onChangeText={(val) => setPassword(val)} // Use onChangeText and setPassword
+            secureTextEntry
+          />
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => invalidFormAlert("Form inválido")}
+          >
+            <Text style={styles.buttonText}>Entrar</Text>
+          </TouchableOpacity>
+          <View style={styles.footerActions}>
+            <Link
+              href={"/auth/forgot-password"}
+              style={styles.footerActionsText}
+            >
+              Esqueci minha senha
+            </Link>
+            <Link href={"/login"} style={styles.footerActionsText}>
+              <Text>Já tenho cadastro</Text>
+            </Link>
+          </View>
         </View>
       </View>
     </SafeAreaView>
@@ -78,6 +83,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     marginTop: 20,
   },
+  wrapper: {
+    padding: 20,
+    borderRadius: 12,
+    gap: 12,
+    backgroundColor: "#fff",
+  },
   logo: {
     fontWeight: "bold",
     fontSize: 40,
@@ -88,12 +99,8 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontFamily: "Inter_700Bold",
   },
-  form: {
-    marginTop: 20,
-  },
   text: {
     fontSize: 18,
-    marginTop: 8,
   },
   input: {
     marginVertical: 8,
