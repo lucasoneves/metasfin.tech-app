@@ -1,4 +1,4 @@
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { useState } from "react";
 import {
   Alert,
@@ -51,7 +51,7 @@ const Login = () => {
           return invalidFormAlert(errorMsg);
         }
         // Sucesso: prossiga conforme necessário
-        Alert.alert("Login realizado com sucesso!");
+        router.push("/challenges");
       })
       .catch((error) => {
         setLoading(false);
@@ -70,7 +70,6 @@ const Login = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.logo}>Metasfin.tech</Text>
       <Text style={styles.title}>Login</Text>
       <Text style={styles.text}>Preencha seu email e senha de acesso</Text>
       <View style={styles.form}>
@@ -93,9 +92,9 @@ const Login = () => {
           </Text>
         </TouchableOpacity>
         <View style={styles.footerActions}>
-          <Link href={"/auth/forgot-password"} style={styles.footerActionsText}>
+          {/* <Link href={"/auth/forgot-password"} style={styles.footerActionsText}>
             Esqueci minha senha
-          </Link>
+          </Link> */}
           <Link href={"/sign-up"} style={styles.footerActionsText}>
             Cadastre-se
           </Link>
@@ -110,12 +109,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     marginTop: 20,
   },
-  logo: {
-    fontWeight: "bold",
-    fontSize: 40,
-    textAlign: "center",
-    marginBottom: 30,
-  },
+
   title: {
     fontSize: 30,
     fontFamily: "Inter_700Bold",

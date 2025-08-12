@@ -1,4 +1,4 @@
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { useState } from "react";
 import {
   Alert,
@@ -14,13 +14,53 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleLogin = () => {
-    console.log(email, password);
+  const handleSignUp = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!email) {
+      return invalidFormAlert("Email é obrigatório");
+    }
+
+    if (!emailRegex.test(email)) {
+      return invalidFormAlert("Email inválido");
+    }
+    if (!password) {
+      return invalidFormAlert("Senha é obrigatória");
+    }
+
+    if (password.length < 6) {
+      return invalidFormAlert("Senha deve ter no mínimo 6 caracteres");
+    }
+
+    setLoading(true);
+    fetch("https://metasfin-tech-api.onrender.com/api/auth/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, username, password }),
+    })
+      .then(async (response) => {
+        setLoading(false);
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({}));
+          const errorMsg =
+            errorData?.message || "Erro ao cadastrar. Verifique seus dados";
+          return invalidFormAlert(errorMsg);
+        }
+        // Sucesso: prossiga conforme necessário
+        router.push("/login");
+      })
+      .catch((error) => {
+        setLoading(false);
+        invalidFormAlert("Erro de conexão. Tente novamente.");
+      });
   };
 
   const invalidFormAlert = (message: string) =>
-    Alert.alert("Alert Title", message, [
+    Alert.alert("Erro no formulário", message, [
       {
         text: "Cancel",
         onPress: () => console.log("Cancel Pressed"),
@@ -31,7 +71,6 @@ const SignUp = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.logo}>Metasfin.tech</Text>
       <View style={styles.wrapper}>
         <Text style={styles.title}>Criar conta</Text>
         <Text style={styles.text}>Preencha os dados para criar o acesso</Text>
@@ -46,7 +85,7 @@ const SignUp = () => {
             style={styles.input}
             placeholder="Nome de usuário"
             value={username}
-            onChangeText={(val) => setEmail(val)} // Use onChangeText for TextInput
+            onChangeText={(val) => setUsername(val)} // Use onChangeText for TextInput
           />
           <TextInput
             style={styles.input}
@@ -57,9 +96,9 @@ const SignUp = () => {
           />
           <TouchableOpacity
             style={styles.button}
-            onPress={() => invalidFormAlert("Form inválido")}
+            onPress={() => handleSignUp()}
           >
-            <Text style={styles.buttonText}>Entrar</Text>
+            <Text style={styles.buttonText}>Cadastrar</Text>
           </TouchableOpacity>
           <View style={styles.footerActions}>
             <Link
@@ -88,12 +127,6 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     gap: 12,
     backgroundColor: "#fff",
-  },
-  logo: {
-    fontWeight: "bold",
-    fontSize: 40,
-    textAlign: "center",
-    marginBottom: 30,
   },
   title: {
     fontSize: 30,
