@@ -22,13 +22,7 @@ export default function RootLayout() {
   }
   return (
     <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="index" options={{ headerShown: false }} />
-      <Stack.Screen
-        name="auth/forgot-password"
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen name="challenges/index" options={{ headerShown: false }} />
-      <Stack.Screen name="challenges/[id]" options={{ headerShown: false }} />
+      <Stack.Screen name="index" />
     </Stack>
   );
 }

@@ -1,14 +1,7 @@
-import { Link, useRouter } from "expo-router";
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Link } from "expo-router";
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 
 export default function Index() {
-  const router = useRouter();
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.wrapper}>
@@ -20,14 +13,9 @@ export default function Index() {
           progresso para alcançar seus objetivos.
         </Text>
 
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            router.push("/login");
-          }}
-        >
-          <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
+        <Link href="/login" style={[styles.buttonText]}>
+          Login
+        </Link>
         <Link
           href="/sign-up"
           style={[
